@@ -1,0 +1,14 @@
+Figuras de FMS-201, en el orden de docs/bitacora_algoritmos.txt
+=================================================================
+
+01_referencia_pieza_ok.jpg: Imagen de referencia: pieza colocada correctamente.
+02_referencia_pieza_nok.jpg: Imagen de referencia: pieza colocada al reves.
+03_paso1_roi_recorte.png: Recorte fijo (ROI) sobre captura_1 (Paso 1).
+04_paso1_conversion_grises.png: Resultado de convertir_a_grises sobre el ROI (Paso 1).
+05_paso2_binarizado_otsu_ok.png: Binarizado Otsu de la pieza OK (Paso 2).
+06_paso2_binarizado_otsu_invertida.png: Binarizado Otsu de la pieza invertida (Paso 2).
+07_paso2_binarizado_otsu_vacia.png: Binarizado Otsu de la estacion vacia dentro del ROI: solo ruido pequeno, sin pieza (Paso 2).
+08_paso3_todos_los_contornos.png: Todos los contornos detectados dentro del ROI (Paso 3).
+09_paso4_resultado_final_ok.png: Resultado final sobre captura_1 (pieza OK) (resultado: PIEZA_OK).
+10_paso4_resultado_final_invertida.png: Resultado final sobre captura_20 (pieza invertida) (resultado: PIEZA_NOK).
+11_paso4_resultado_final_vacia.png: Resultado final sobre captura_35 (estacion vacia) (resultado: ESTACION_VACIA).

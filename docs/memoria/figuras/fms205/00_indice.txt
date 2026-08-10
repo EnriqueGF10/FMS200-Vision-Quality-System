@@ -1,0 +1,23 @@
+Figuras de FMS-205, en el orden de docs/bitacora_algoritmos.txt
+=================================================================
+
+01_referencia_vacio.jpg: Referencia: sin tapon.
+02_referencia_metal_baja.jpg: Referencia: tapon metalico bajo.
+03_referencia_metal_alta.jpg: Referencia: tapon metalico alto.
+04_referencia_negra_baja.jpg: Referencia: tapon negro bajo.
+05_referencia_negra_alta.jpg: Referencia: tapon negro alto.
+06_referencia_blanca_baja.jpg: Referencia: tapon blanco bajo.
+07_referencia_blanca_alta.jpg: Referencia: tapon blanco alto.
+08_paso1_roi_recorte.png: Recorte fijo (ROI) sobre captura_1 (Paso 1).
+09_paso2_binarizado_metal_bajo.png: captura_10 (metal bajo): el hueco detectado es pequeno (Paso 2).
+10_paso2_binarizado_negro_bajo.png: captura_60 (negro bajo): todo el tapon se lee como 'hueco' por ser oscuro (Paso 2).
+11_paso2_binarizado_blanco_bajo.png: captura_90 (blanco bajo): el hueco detectado es pequeno, igual que el metalico (Paso 2).
+12_paso6_gradiente_sin_tapon.png: SIN_TAPON: cavidad hueca, gradiente interior alto (gradiente medido: 40.4, Paso 6).
+13_paso6_gradiente_metal_alto.png: TAPON_METALICO_ALTO: tapa plana, gradiente interior bajo (gradiente medido: 27.5, Paso 6).
+14_paso6_resultado_final_sin_tapon.png: Resultado final sobre captura_1 (sin tapon) (resultado: SIN_TAPON).
+15_paso6_resultado_final_metal_bajo.png: Resultado final sobre captura_10 (tapon metalico bajo) (resultado: TAPON_METALICO_BAJO).
+16_paso6_resultado_final_metal_alto.png: Resultado final sobre captura_27 (tapon metalico alto) (resultado: TAPON_METALICO_ALTO).
+17_paso6_resultado_final_negro_bajo.png: Resultado final sobre captura_60 (tapon negro bajo) (resultado: TAPON_NEGRO_BAJO).
+18_paso6_resultado_final_negro_alto.png: Resultado final sobre captura_70 (tapon negro alto) (resultado: TAPON_NEGRO_ALTO).
+19_paso6_resultado_final_blanco_bajo.png: Resultado final sobre captura_90 (tapon blanco bajo) (resultado: TAPON_BLANCO_BAJO).
+20_paso6_resultado_final_blanco_alto.png: Resultado final sobre captura_110 (tapon blanco alto) (resultado: TAPON_BLANCO_ALTO).

@@ -1,0 +1,12 @@
+Figuras de FMS-206, en el orden de docs/bitacora_algoritmos.txt
+=================================================================
+
+01_paso1_roi_recorte.png: Recorte fijo (ROI) sobre captura_1, sin tornillos (Paso 1).
+02_paso2_posiciones_taladros.png: Las 4 posiciones fijas de tornillo, localizadas con Hough Circles (Paso 2).
+03_paso3_zoom_arriba_vacio.png: Zoom x5 de la posicion 'arriba' vacia, captura_1 (Paso 3).
+04_paso3_zoom_arriba_tornillo.png: Zoom x5 de la misma posicion con tornillo, captura_44: se ve desplazado hacia arriba por paralaje (Paso 3).
+05_paso4_resultado_0_tornillos.png: Resultado final sobre captura_1 (0 tornillos) (resultado: INCOMPLETO).
+06_paso4_resultado_1_tornillo.png: Resultado final sobre captura_18 (1 tornillo) (resultado: INCOMPLETO).
+07_paso4_resultado_2_tornillos.png: Resultado final sobre captura_31 (2 tornillos) (resultado: INCOMPLETO).
+08_paso4_resultado_3_tornillos.png: Resultado final sobre captura_37 (3 tornillos) (resultado: INCOMPLETO).
+09_paso4_resultado_completo.png: Resultado final sobre captura_44 (4 tornillos, COMPLETO) (resultado: COMPLETO).

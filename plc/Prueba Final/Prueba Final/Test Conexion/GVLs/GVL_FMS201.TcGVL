@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.16">
+  <GVL Name="GVL_FMS201" Id="{b04e9ba7-b910-4a52-adf8-c9833cc3da4a}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+	bTrigger        : BOOL;
+    bInspeccionando : BOOL;
+    iResultado      : INT;
+    sResultado      : STRING(80);
+    bResultadoListo : BOOL;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

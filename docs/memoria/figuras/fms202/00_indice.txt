@@ -1,0 +1,14 @@
+Figuras de FMS-202, en el orden de docs/bitacora_algoritmos.txt
+=================================================================
+
+01_referencia_bolas_vs_sellado.jpg: Rodamiento sellado (izq.) vs. de bolas (dcha.), imagen de referencia.
+02_paso1_imagen_original_sin_pieza.png: captura_1.jpg, pieza de FMS-201 sin rodamiento (Paso 1).
+03_paso1_roi_recorte.png: Recorte fijo (ROI) sobre captura_35, elimina fondo/railes (Paso 1).
+04_paso3_binarizado_sin_cierre.png: Binarizado Otsu sin cierre morfologico (Paso 3), borde con ruido.
+05_paso5_binarizado_con_cierre.png: Mismo binarizado tras el cierre morfologico (Paso 5), borde estabilizado.
+06_paso4_zoom_captura35_limpia.png: Zoom x4 del hueco, captura_35 (negro_bajo limpia, Paso 4).
+07_paso4_zoom_captura43_ruido_otsu.png: Zoom x4 del hueco, captura_43 (visualmente identica a 06, la diferencia era ruido de Otsu, Paso 4).
+08_paso6_resultado_final_negro_bajo.png: Resultado final sobre captura_35 (rodamiento negro bajo) (resultado: RODAMIENTO_NEGRO_BAJO).
+09_paso6_resultado_final_negro_alto.png: Resultado final sobre captura_54 (rodamiento negro alto) (resultado: RODAMIENTO_NEGRO_ALTO).
+10_paso6_resultado_final_bolas.png: Resultado final sobre captura_78 (rodamiento de bolas) (resultado: RODAMIENTO_BOLAS).
+11_paso6_resultado_final_error_sin_pieza.png: Resultado final sobre captura_1 (sin rodamiento -> ERROR) (resultado: ERROR).
