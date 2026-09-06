@@ -42,11 +42,8 @@ ESTACIONES = {
     "FMS201": {
         "modulo": fms201,
         "nombre_gvl": "GVL_FMS201",
-        # Runtime local de TwinCAT 3 en este mismo PC (proyecto de prueba
-        # "PruebaADS"), usado para validar el protocolo ADS sin PLC física
-        # ni cámara/aro de luz reales.
-        "ams_net_id": "10.60.186.36.1.1",
-        "ams_port": 851,
+        "ams_net_id": None,
+        "ams_port": None,
         "resultados": ["PIEZA_OK", "PIEZA_NOK", "ESTACION_VACIA"],
     },
     "FMS202": {
