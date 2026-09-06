@@ -76,6 +76,8 @@ def decidir_tipo_rodamiento(hueco):
     Clasifica el tipo de rodamiento (o su ausencia) a partir del área del
     hueco central.
     """
+    if hueco is None:
+        return "ERROR"
     area = cv.contourArea(hueco)
     if area < AREA_MAX_SIN_RODAMIENTO:
         return "ERROR"

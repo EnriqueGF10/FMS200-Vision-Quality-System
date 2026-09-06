@@ -113,7 +113,16 @@ def decidir_tipo_y_altura(hueco, grises):
     Clasifica el estado del tapón (o su ausencia) a partir del área del
     hueco, con dos desempates puntuales (perímetro para blanco, gradiente
     para sin_tapon/metálico_alto) donde el área por sí sola no basta.
+
+    Devuelve None si no se ha encontrado ningún hueco interior, ya que
+    ninguno de los siete estados del vocabulario de esta estación
+    representa esa situación (a diferencia de FMS-201/FMS-202, que sí
+    tienen un estado de "pieza ausente" reutilizable). El orquestador
+    (apartado 4.6) interpreta ese None como una inspección sin
+    clasificar y no escribe ningún resultado por ADS ese ciclo.
     """
+    if hueco is None:
+        return None
     area = cv.contourArea(hueco)
 
     if area < AREA_MAX_BLANCO:

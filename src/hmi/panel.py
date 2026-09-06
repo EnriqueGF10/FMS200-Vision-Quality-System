@@ -12,7 +12,7 @@ import cv2 as cv
 # de en verde. Se basta con mirar si alguna de estas palabras aparece en el
 # string de resultado, porque los 4 algoritmos ya usan este vocabulario
 # (ESTACION_VACIA, RODAMIENTO_.../ERROR, INCOMPLETO, PIEZA_NOK).
-PALABRAS_NO_FAVORABLES = ("ERROR", "KO", "VACIA", "INCOMPLETO")
+PALABRAS_NO_FAVORABLES = ("ERROR", "KO", "VACIA", "INCOMPLETO", "SIN_CLASIFICAR")
 
 COLOR_FAVORABLE = (0, 200, 0)  # verde (BGR)
 COLOR_NO_FAVORABLE = (0, 0, 220)  # rojo (BGR)

@@ -120,6 +120,18 @@ def procesar_tarea(id_estacion, camara, conexiones, estado, lock):
 
     resultado = datos["modulo"].procesar(frame)
 
+    if resultado is None:
+        # La estación no ha podido clasificar esta captura (apartado 4.4.4).
+        # No se escribe iResultado/sResultado, solo se cierra el ciclo para
+        # que la estación quede lista para un nuevo disparo.
+        if conexion is not None:
+            conexion.limpiar_ciclo()
+        with lock:
+            estado["estacion_actual"] = id_estacion
+            estado["ultimo_resultado"] = "SIN_CLASIFICAR"
+            estado["historial"].append((id_estacion, "SIN_CLASIFICAR"))
+        return
+
     if conexion is not None:
         conexion.escribir_resultado(resultado)
         conexion.limpiar_ciclo()

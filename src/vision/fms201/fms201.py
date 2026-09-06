@@ -86,6 +86,8 @@ def decidir_orientacion(hueco):
     hueco pequeño y ovalado (OK) tiene mucho menos perímetro que uno grande
     y con forma de "sonrisa" (invertida), aunque sus áreas sean parecidas.
     """
+    if hueco is None:
+        return "PIEZA_NOK"
     perimetro = cv.arcLength(hueco, True)
     if perimetro < PERIMETRO_MAX_PIEZA_OK:
         return "PIEZA_OK"
