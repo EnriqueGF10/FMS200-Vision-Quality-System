@@ -19,6 +19,10 @@ bInspeccionando/bResultadoListo (listo para el siguiente ciclo).
 
 ams_net_id/ams_port quedan a None hasta que se conecte cada estación a su
 PLC real en el laboratorio (el hardware solo permite probar una a la vez).
+
+El aro de luz no se controla desde aquí: cada PLC enciende y apaga su propia
+salida bAroLuzOn en su propia GVL, en función de bTrigger/bResultadoListo,
+sin intervención del PC (ver src/comunicacion/cliente_ads.py).
 """
 
 from src.vision.fms201 import fms201
@@ -27,23 +31,12 @@ from src.vision.fms205 import fms205
 from src.vision.fms206 import fms206
 
 
-# Nombre de la variable, en la GVL del PLC dueño de la luz, que enciende el
-# aro de luz físico. Solo hay un aro de luz para las 4 estaciones, así que
-# vive en una única PLC (fija) y no en cada una de las 4 GVL de estación.
-GVL_ILUMINACION = "GVL_Iluminacion"
-VARIABLE_ARO_LUZ = f"{GVL_ILUMINACION}.bAroLuzOn"
-
-# Estación cuya PLC controla físicamente el aro de luz. 
-# Modificar este valor en función de la máquina que estemos corriendo.
-ESTACION_DUEÑA_DE_LA_LUZ = "FMS201"
-
-
 ESTACIONES = {
     "FMS201": {
         "modulo": fms201,
         "nombre_gvl": "GVL_FMS201",
-        "ams_net_id": None,
-        "ams_port": None,
+        "ams_net_id": "5.67.250.180.1.1",
+        "ams_port": 851,
         "resultados": ["PIEZA_OK", "PIEZA_NOK", "ESTACION_VACIA"],
     },
     "FMS202": {

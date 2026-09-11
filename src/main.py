@@ -1,10 +1,14 @@
 """
 src/main.py: orquestador de las 4 estaciones FMS-200.
 
-Solo hay una cámara y un aro de luz físicos para las 4 estaciones, así que
-la captura + inspección es forzosamente secuencial: una cola productor-consumidor
-con un único hilo trabajador es quien toca la cámara/aro de luz, evitando
-condiciones de carrera sobre ese recurso compartido.
+Solo hay una cámara física para las 4 estaciones, así que la captura +
+inspección es forzosamente secuencial: una cola productor-consumidor con
+un único hilo trabajador es quien toca la cámara, evitando condiciones de
+carrera sobre ese recurso compartido.
+
+El aro de luz no lo controla este módulo: cada PLC enciende su propia
+salida bAroLuzOn en cuanto sube bTrigger y la apaga en cuanto el PC escribe
+bResultadoListo, en su propia lógica ST (src/comunicacion/cliente_ads.py).
 
 Cada estación dispara una tarea de dos formas posibles, indistintas para el
 hilo trabajador:
@@ -35,7 +39,7 @@ from pathlib import Path
 import cv2 as cv
 import numpy as np
 
-from src.config_estaciones import ESTACIONES, ESTACION_DUEÑA_DE_LA_LUZ
+from src.config_estaciones import ESTACIONES
 from src.comunicacion.cliente_ads import ConexionEstacion
 from src.hmi.panel import dibujar_overlay
 
@@ -95,7 +99,6 @@ def crear_conexiones_activas(cola):
             datos["ams_port"],
             datos["nombre_gvl"],
             datos["resultados"],
-            es_dueña_de_la_luz=(id_estacion == ESTACION_DUEÑA_DE_LA_LUZ),
         )
         conexion.conectar()
         conexion.suscribir_trigger(lambda id_estacion=id_estacion: cola.put(id_estacion))
@@ -106,17 +109,11 @@ def crear_conexiones_activas(cola):
 def procesar_tarea(id_estacion, camara, conexiones, estado, lock):
     datos = ESTACIONES[id_estacion]
     conexion = conexiones.get(id_estacion)
-    conexion_luz = conexiones.get(ESTACION_DUEÑA_DE_LA_LUZ)
 
     if conexion is not None:
         conexion.marcar_inspeccionando(True)
-    if conexion_luz is not None:
-        conexion_luz.controlar_aro_luz(True)
 
     frame = capturar_frame(camara, id_estacion)
-
-    if conexion_luz is not None:
-        conexion_luz.controlar_aro_luz(False)
 
     resultado = datos["modulo"].procesar(frame)
 
@@ -144,9 +141,9 @@ def procesar_tarea(id_estacion, camara, conexiones, estado, lock):
 
 def hilo_trabajador(cola, camara, conexiones, estado, lock, detener):
     """
-    Único hilo que toca la cámara/aro de luz. Consume la cola en orden de
-    llegada, así que dos triggers casi simultáneos de estaciones distintas
-    se procesan uno detrás de otro, nunca a la vez.
+    Único hilo que toca la cámara. Consume la cola en orden de llegada, así
+    que dos triggers casi simultáneos de estaciones distintas se procesan
+    uno detrás de otro, nunca a la vez.
     """
     while not detener.is_set():
         try:
@@ -178,6 +175,7 @@ def main():
         print(f"Conectado por ADS a: {', '.join(conexiones)}")
     else:
         print("Sin ninguna PLC conectada (ams_net_id sin asignar en config_estaciones.py).")
+        print("ams_net_id")
     if camara is None:
         print("Sin cámara detectada: se usará una imagen de muestra por estación.")
     print("Teclas: 1=FMS201  2=FMS202  3=FMS205  4=FMS206  q=salir\n")

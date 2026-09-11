@@ -2,9 +2,12 @@
 src/comunicacion/cliente_ads.py: cliente PyADS de una estación.
 
 Envuelve una única conexión ADS (una PLC) y expone el protocolo acordado en
-src/config_estaciones.py: notificación de bTrigger, escritura del resultado
-como (índice entero + texto), y control del aro de luz cuando la estación es
-la dueña de esa salida.
+src/config_estaciones.py: notificación de bTrigger, y escritura del
+resultado como (índice entero + texto).
+
+El aro de luz no se controla desde aquí: cada PLC enciende bAroLuzOn cuando
+sube bTrigger y lo apaga cuando el PC escribe bResultadoListo, en su propia
+lógica ST, sin que el PC intervenga en esa salida.
 
 No abre cámara ni ventanas: solo habla con el PLC. Se prueba de forma
 aislada con scripts/probar_cliente_ads.py contra un pyads.testserver.AdsTestServer
@@ -22,11 +25,10 @@ class ConexionEstacion:
     instancia por cada fila de config_estaciones.ESTACIONES.
     """
 
-    def __init__(self, id_estacion, ams_net_id, ams_port, nombre_gvl, resultados, es_dueña_de_la_luz=False):
+    def __init__(self, id_estacion, ams_net_id, ams_port, nombre_gvl, resultados):
         self.id_estacion = id_estacion
         self.nombre_gvl = nombre_gvl
         self.resultados = resultados
-        self.es_dueña_de_la_luz = es_dueña_de_la_luz
         self._plc = pyads.Connection(ams_net_id, ams_port)
         self._handle_notificacion = None
 
@@ -78,16 +80,3 @@ class ConexionEstacion:
         """Baja bInspeccionando y bResultadoListo: la estación queda lista para el próximo trigger."""
         self.marcar_inspeccionando(False)
         self._plc.write_by_name(f"{self.nombre_gvl}.bResultadoListo", False, pyads.PLCTYPE_BOOL)
-
-    def controlar_aro_luz(self, encendido):
-        """
-        Enciende/apaga el aro de luz físico. Solo tiene efecto si esta
-        instancia es la dueña de esa salida (config_estaciones.ESTACION_DUEÑA_DE_LA_LUZ);
-        las demás no hacen nada, así el orquestador no necesita preguntar
-        "quién soy" antes de llamar a este método.
-        """
-        if not self.es_dueña_de_la_luz:
-            return
-        from src.config_estaciones import VARIABLE_ARO_LUZ
-
-        self._plc.write_by_name(VARIABLE_ARO_LUZ, encendido, pyads.PLCTYPE_BOOL)
